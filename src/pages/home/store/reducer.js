@@ -1,24 +1,19 @@
 import * as constants from "./constants";
 import { fromJS } from "immutable";
 const defaultState = fromJS({
-  topicList: [
-    {
-      id: 1,
-      title: "社會熱點",
-      imgUrl:
-        "http://upload-images.jianshu.io/upload_images/11899212-bb3bc053d689da5b"
-    },
-    {
-      id: 2,
-      title: "手繪",
-      imgUrl:
-        "http://upload-images.jianshu.io/upload_images/11899212-bb3bc053d689da5b"
-    }
-  ]
+  topicList: [],
+  articleList: [],
+  recommendList: []
 });
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+    case constants.CHANGE_HOME_DATA:
+      return state.merge({
+        topicList: fromJS(action.topicList),
+        articleList: fromJS(action.articleList),
+        recommendList: fromJS(action.recommendList)
+      });
     default:
       return state;
   }

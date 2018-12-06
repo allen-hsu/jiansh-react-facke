@@ -1,43 +1,17 @@
 import * as constants from "./constants";
-import { fromJS } from "immutable";
 import axios from "axios";
-
-const chnageList = data => ({
-  type: constants.CHANGE_LIST,
-  data: fromJS(data),
-  totalPage: Math.ceil(data.length / 10)
+const changeHomeData = result => ({
+  type: constants.CHANGE_HOME_DATA,
+  topicList: result.topicList,
+  articleList: result.articleList,
+  recommendList: result.recommendList
 });
-
-export const searchFocus = () => ({
-  type: constants.SEARCH_FOCUS
-});
-
-export const searchBlur = () => ({
-  type: constants.SEARCH_BLUR
-});
-export const mouseEnter = () => ({
-  type: constants.MOUSE_ENTER
-});
-
-export const mouseLeave = () => ({
-  type: constants.MOUSE_LEAVE
-});
-
-export const changePage = page => ({
-  type: constants.CHANGE_PAGE,
-  page
-});
-
-export const getList = () => {
+export const getHomeInfo = () => {
   return dispatch => {
-    axios
-      .get("/api/headerList.json")
-      .then(res => {
-        const data = res.data;
-        dispatch(chnageList(data.data));
-      })
-      .catch(() => {
-        console.log("error");
-      });
+    axios.get("/api/home.json").then(res => {
+      const result = res.data.data;
+      const action = changeHomeData(result);
+      dispatch(action);
+    });
   };
 };

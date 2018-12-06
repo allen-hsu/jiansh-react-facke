@@ -3,7 +3,10 @@ import Topic from "./component/Topic";
 import List from "./component/List";
 import Recommed from "./component/Recommed";
 import Writer from "./component/Writer";
+import { connect } from "react-redux";
 import { HomeWrapper, HomeLeft, HomeRight } from "./style";
+import { actionCreators } from "./store";
+
 class Home extends Component {
   render() {
     return (
@@ -24,6 +27,25 @@ class Home extends Component {
       </HomeWrapper>
     );
   }
+  componentDidMount() {
+    this.props.changeHomeData();
+  }
 }
 
-export default Home;
+const mapStateToProps = (state, ownProps) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeHomeData() {
+      const action = actionCreators.getHomeInfo();
+      dispatch(action);
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
