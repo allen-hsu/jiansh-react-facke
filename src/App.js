@@ -13,17 +13,14 @@ class App extends Component {
       <React.Fragment>
         <GlobalStyle />
         <GlobalStyleFont />
-
         <Provider store={store}>
-          <div>
-            <Header />
-            <BrowserRouter>
-              <div>
-                <Route path="/" exact component={Home} />
-                <Route path="/detail" exact component={Detail} />
-              </div>
-            </BrowserRouter>
-          </div>
+          <BrowserRouter>
+            <div>
+              <Header />
+              <Route path="/" exact component={Home} />
+              <Route path="/detail" exact component={Detail} />
+            </div>
+          </BrowserRouter>
         </Provider>
       </React.Fragment>
     );
